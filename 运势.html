@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双子座7月每日运势</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a0a2e, #2d0b50, #4a1b7a);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .constellation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .container {
+            background: rgba(10, 5, 25, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .gemini-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #8a6df7;
+            text-shadow: 0 0 15px rgba(138, 109, 247, 0.7);
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #8a6df7, #5da8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(93, 168, 255, 0.3);
+        }
+        
+        .date-info {
+            color: #b8b5ff;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .current-date {
+            font-size: 1.1rem;
+            color: #d4d2ff;
+            margin-bottom: 30px;
+        }
+        
+        .zodiac-container {
+            background: rgba(30, 15, 60, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(138, 109, 247, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #zodiac-text {
+            color: #f1f1ff;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            font-weight: 500;
+            max-width: 90%;
+            transition: all 0.5s ease;
+        }
+        
+        .loading {
+            font-size: 1.8rem;
+            color: #8a6df7;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #8a6df7, #5da8ff);
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(138, 109, 247, 0.4);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 109, 247, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #5da8ff, #8a6df7);
+            z-index: -1;
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .instruction {
+            color: #b8b5ff;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .category {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: rgba(138, 109, 247, 0.2);
+            color: #d4d2ff;
+            border: 1px solid rgba(138, 109, 247, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .category-btn.active {
+            background: rgba(138, 109, 247, 0.4);
+            color: #fff;
+            border-color: #8a6df7;
+            box-shadow: 0 0 10px rgba(138, 109, 247, 0.5);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #8a89a5;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 20px;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .zodiac-container {
+                padding: 20px 15px;
+            }
+            
+            #zodiac-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="constellation" id="constellation"></div>
+    
+    <!-- 粒子效果画布 -->
+    <canvas class="particles" id="particles"></canvas>
+    
+    <div class="container">
+        <div class="header">
+            <div class="gemini-icon">♊</div>
+            <h1>双子座七月运势</h1>
+            <div class="date-info">2024年7月1日 - 7月31日</div>
+            <div class="current-date" id="current-date"></div>
+        </div>
+        
+        <div class="zodiac-container">
+            <p id="zodiac-text">点击按钮查看今日运势</p>
+        </div>
+        
+        <div class="category">
+            <div class="category-btn active" data-category="daily">每日运势</div>
+            <div class="category-btn" data-category="love">爱情运势</div>
+            <div class="category-btn" data-category="career">事业运势</div>
+            <div class="category-btn" data-category="finance">财运运势</div>
+        </div>
+        
+        <button class="btn" id="generate-btn">查看今日运势</button>
+        
+        <p class="instruction">每天查看，获取专属于双子座的每日指引</p>
+        
+        <div class="footer">
+            <p>运势内容仅供参考，生活由你创造</p>
+        </div>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const zodiacText = document.getElementById('zodiac-text');
+        const generateBtn = document.getElementById('generate-btn');
+        const currentDateEl = document.getElementById('current-date');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        
+        // 当前日期显示
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        currentDateEl.textContent = now.toLocaleDateString('zh-CN', options);
+        
+        // 星座运势数据库
+        const fortunes = {
+            daily: [
+                "今天你的沟通能力特别强，适合进行重要谈判或表达情感。",
+                "社交运极佳，参加聚会可能遇到有趣的新朋友。",
+                "注意细节问题，今天容易在小事上出错。",
+                "创意灵感迸发，适合进行艺术创作或写作。",
+                "可能会收到意外的好消息，保持手机畅通。",
+                "今天适合处理财务问题，但避免冲动消费。",
+                "学习运佳，吸收新知识的速度特别快。",
+                "注意身体健康，适当休息避免过度劳累。",
+                "家庭关系和谐，适合与家人共度时光。",
+                "工作中有贵人相助，困难问题迎刃而解。",
+                "旅行运佳，短途出行会带来愉快体验。",
+                "感情方面需要更多耐心，避免急躁决定。",
+                "适合尝试新事物，跳出舒适圈会有收获。",
+                "今天直觉敏锐，相信自己的第一感觉。",
+                "工作中有展示才能的机会，好好把握。",
+                "注意情绪管理，避免因小事与人争执。",
+                "财运不错，可能有意外收入进账。",
+                "适合整理居住环境，断舍离带来好心情。",
+                "学习新技能的好时机，投资自己最划算。",
+                "可能会收到旧友联系，重温美好回忆。",
+                "健康方面注意饮食均衡，多补充水分。",
+                "团队合作顺利，同事关系更加融洽。",
+                "感情需要更多浪漫元素，制造小惊喜。",
+                "思维清晰，适合解决复杂问题。",
+                "注意交通安全，出行前检查车辆状况。",
+                "购物运佳，容易买到心仪已久的物品。",
+                "今天适合冥想或瑜伽，平衡身心能量。",
+                "工作中可能有新机会出现，保持开放态度。",
+                "家庭事务需要你更多关注和参与。",
+                "社交场合注意言行，避免无意冒犯他人。",
+                "月末总结的好时机，规划下月目标。"
+            ],
+            love: [
+                "单身者可能在社交场合遇到心动对象",
+                "与伴侣的深度对话能增进感情",
+                "避免在感情中过度分析，相信直觉",
+                "今天适合策划浪漫约会",
+                "坦诚沟通能解决潜在的误会",
+                "旧情复燃的可能性存在，谨慎考虑",
+                "展现真实的自己，吸引对的人",
+                "感情中需要更多耐心和理解",
+                "意外的邂逅可能改变感情状态",
+                "避免感情用事，理性处理分歧",
+                "表达爱意的好时机，不要犹豫",
+                "单身者专注自我成长更有魅力",
+                "旅行可能带来浪漫际遇",
+                "注意感情中的小细节，温暖人心",
+                "长期关系需要新鲜元素注入"
+            ],
+            career: [
+                "项目推进顺利，获得同事认可",
+                "新的职业机会可能出现",
+                "团队合作是关键，避免单打独斗",
+                "创意想法被采纳，好好表现",
+                "注意工作细节，避免小失误",
+                "与上级沟通顺畅，表达想法",
+                "学习新技能提升职业竞争力",
+                "工作中可能有贵人相助",
+                "合理规划时间，提高效率",
+                "职业转型的好时机，勇敢尝试",
+                "重要会议前充分准备",
+                "建立有价值的人脉关系",
+                "工作与生活平衡需要关注",
+                "展示领导才能的机会出现",
+                "长期项目看到进展曙光"
+            ],
+            finance: [
+                "意外收入的可能性存在",
+                "投资需谨慎，避免冲动决定",
+                "副业机会出现，增加收入来源",
+                "控制消费欲望，理性购物",
+                "财务规划的好时机",
+                "可能有退款或报销入账",
+                "学习理财知识提升财商",
+                "避免高风险投资",
+                "旧债回收的可能性",
+                "购物时注意比价，节省开支",
+                "合作项目带来财务收益",
+                "家庭财务需要更多关注",
+                "长期投资显现回报",
+                "避免借贷，保持财务健康",
+                "开源节流双管齐下"
+            ]
+        };
+        
+        // 当前选择的运势类别
+        let currentCategory = 'daily';
+        
+        // 初始化星座背景
+        function initConstellation() {
+            const container = document.getElementById('constellation');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机位置和大小
+                const size = Math.random() * 3 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(star);
+            }
+        }
+        
+        // 粒子系统
+        let particles = [];
+        let particleAnimationId;
+        const particleColors = ['#8a6df7', '#5da8ff', '#b88cff', '#6d9fff'];
+        
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            
+            // 设置canvas尺寸
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // 创建粒子
+            const particleCount = 80;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 3 + 1,
+                    color: particleColors[Math.floor(Math.random() * particleColors.length)],
+                    speed: Math.random() * 2 + 0.5,
+                    angle: Math.random() * Math.PI * 2,
+                    opacity: Math.random() * 0.5 + 0.3,
+                    drift: Math.random() * 0.05 - 0.025
+                });
+            }
+            
+            // 开始动画
+            drawParticles();
+        }
+        
+        function drawParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            
+            // 清除画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 更新并绘制粒子
+            particles.forEach(particle => {
+                // 更新位置
+                particle.x += Math.cos(particle.angle) * particle.speed;
+                particle.y += Math.sin(particle.angle) * particle.speed;
+                particle.angle += particle.drift;
+                
+                // 边界检查
+                if (particle.x < 0 || particle.x > canvas.width || 
+                    particle.y < 0 || particle.y > canvas.height) {
+                    particle.x = Math.random() * canvas.width;
+                    particle.y = Math.random() * canvas.height;
+                }
+                
+                // 绘制粒子
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.globalAlpha = particle.opacity;
+                ctx.fill();
+            });
+            
+            ctx.globalAlpha = 1;
+            
+            // 继续动画
+            particleAnimationId = requestAnimationFrame(drawParticles);
+        }
+        
+        // 打字机效果显示运势
+        function typewriterEffect(text, speed = 30) {
+            return new Promise((resolve) => {
+                let i = 0;
+                zodiacText.innerHTML = '';
+                
+                function type() {
+                    if (i < text.length) {
+                        zodiacText.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        resolve();
+                    }
+                }
+                
+                type();
+            });
+        }
+        
+        // 生成今日运势
+        async function generateFortune() {
+            // 清除旧运势
+            zodiacText.innerHTML = '<span class="loading">✨ 正在连接星辰...</span>';
+            
+            // 获取当前类别运势
+            const categoryFortunes = fortunes[currentCategory];
+            
+            // 随机选择一条运势
+            const randomIndex = Math.floor(Math.random() * categoryFortunes.length);
+            const fortune = categoryFortunes[randomIndex];
+            
+            // 延迟显示效果
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // 使用打字机效果显示运势
+            await typewriterEffect(fortune);
+        }
+        
+        // 类别切换
+        function setupCategoryButtons() {
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 移除所有active类
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // 添加active类到当前按钮
+                    btn.classList.add('active');
+                    // 更新当前类别
+                    currentCategory = btn.dataset.category;
+                    // 生成新运势
+                    generateFortune();
+                });
+            });
+        }
+        
+        // 初始化
+        window.onload = function() {
+            initConstellation();
+            initParticles();
+            setupCategoryButtons();
+            
+            // 绑定按钮事件
+            generateBtn.addEventListener('click', generateFortune);
+            
+            // 页面加载时显示一条运势
+            setTimeout(generateFortune, 1000);
+        };
+        
+        // 响应窗口大小变化
+        window.addEventListener('resize', function() {
+            const canvas = document.getElementById('particles');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
